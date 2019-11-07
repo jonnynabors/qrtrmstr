@@ -23,8 +23,10 @@
 
 import { Command, flags } from '@oclif/command';
 import { title } from './constants';
-import * as inquirer from 'inquirer';
 import { UserType } from './commands/UserType';
+import { NetworkType } from './commands/NetworkTypes';
+import { MachineType } from './commands/MachineType';
+import { DevelopmentTypes } from './commands/DevelopmentTypes';
 
 class Qrtrmstr extends Command {
   static description = 'describe the command here';
@@ -49,9 +51,14 @@ class Qrtrmstr extends Command {
       this.log(`you input --force and --file: ${args.file}`);
     }
 
-    // TODO: Move into a different command, wait on the commands to run
-    const response: any = await UserType.run();
-    this.log(`you selected ${response.type}`);
+    const user: any = await UserType.run();
+    this.log(`you selected ${user.type}`);
+    const network: any = await NetworkType.run();
+    this.log(`your network is ${network.type}`);
+    const machine: any = await MachineType.run();
+    this.log(`your machine is a ${machine.type}`);
+    const developmentTypes: any = await DevelopmentTypes.run();
+    this.log(`your intended types are ${developmentTypes.types}`);
   }
 }
 
