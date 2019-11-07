@@ -28,6 +28,7 @@ import { NetworkType } from './commands/NetworkTypes';
 import { UserType } from './commands/UserType';
 import { title } from './constants';
 import { checkNetworkConnectivity } from './utilities/NetworkCheck';
+import { DeveloperInstallation } from './DeveloperInstallation';
 
 class Qrtrmstr extends Command {
   static description = 'describe the command here';
@@ -73,6 +74,8 @@ class Qrtrmstr extends Command {
     }
     const developmentTypes: any = await DevelopmentTypes.run();
     this.log(`your intended types are ${developmentTypes.types}`);
+
+    DeveloperInstallation();
   }
 }
 
