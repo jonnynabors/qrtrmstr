@@ -20,13 +20,14 @@
  *   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *   SOFTWARE.
  */
-
 import { Command, flags } from '@oclif/command';
-import { title } from './constants';
-import { UserType } from './commands/UserType';
-import { NetworkType } from './commands/NetworkTypes';
-import { MachineType } from './commands/MachineType';
+
 import { DevelopmentTypes } from './commands/DevelopmentTypes';
+import { MachineType } from './commands/MachineType';
+import { NetworkType } from './commands/NetworkTypes';
+import { UserType } from './commands/UserType';
+import { title } from './constants';
+import { checkNetworkConnectivity } from './utilities/NetworkCheck';
 
 class Qrtrmstr extends Command {
   static description = 'describe the command here';
@@ -51,12 +52,25 @@ class Qrtrmstr extends Command {
       this.log(`you input --force and --file: ${args.file}`);
     }
 
-    const user: any = await UserType.run();
-    this.log(`you selected ${user.type}`);
-    const network: any = await NetworkType.run();
-    this.log(`your network is ${network.type}`);
+    await UserType.run();
+    await NetworkType.run();
+    // TODO: Tell the user to set/unset appropriate proxies
+    try {
+      checkNetworkConnectivity();
+    } catch (error) {
+      this.log(
+        `Hmmm, we're having trouble reaching the internet. Please try again with the proper network settings.`
+      );
+      return;
+    }
+
     const machine: any = await MachineType.run();
-    this.log(`your machine is a ${machine.type}`);
+    if (machine.type === 'Windows') {
+      this.log(
+        `Unfortunately, Windows is not currently supported. If you'd like to see Windows support, please open a Pull Request.`
+      );
+      return;
+    }
     const developmentTypes: any = await DevelopmentTypes.run();
     this.log(`your intended types are ${developmentTypes.types}`);
   }
