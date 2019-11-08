@@ -23,19 +23,27 @@
 import { spawn } from 'child_process';
 import * as execa from 'execa';
 import * as Listr from 'listr';
-import { Observable } from 'rxjs';
+import { fromEvent, Observable } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 export async function DeveloperInstallation() {
   await cachePassword();
+  const homeBrewProcess = spawn('yarn', ['homebrew']);
+  const anythingToString = (anything: any) => anything.toString();
 
   const tasks = new Listr([
     {
       title: 'Installing Homebrew',
       task: async () => {
         return new Observable(observer => {
-          spawn('yarn', ['homebrew'])
-            .on('exit', () => observer.complete())
-            .stdout.on('data', data => observer.next(data.toString()));
+          const data$ = fromEvent(homeBrewProcess.stdout, 'data');
+          const complete$ = fromEvent(homeBrewProcess, 'exit');
+          data$
+            .pipe(
+              map(anythingToString),
+              takeUntil(complete$)
+            )
+            .subscribe(observer);
         });
       }
     },
