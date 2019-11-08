@@ -75,7 +75,7 @@ class Qrtrmstr extends Command {
     const developmentTypes: any = await DevelopmentTypes.run();
     this.log(`your intended types are ${developmentTypes.types}`);
 
-    DeveloperInstallation();
+    await DeveloperInstallation();
   }
 }
 

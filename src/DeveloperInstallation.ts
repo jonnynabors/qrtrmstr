@@ -20,11 +20,42 @@
  *   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *   SOFTWARE.
  */
-import { execFile } from 'child_process';
+import { spawn } from 'child_process';
+import * as execa from 'execa';
+import * as Listr from 'listr';
+import { Observable } from 'rxjs';
 
-export function DeveloperInstallation() {
-  const installProcess = execFile(`${__dirname}/scripts/setup.sh`);
-  installProcess.stdout.on('data', data => {
-    console.log(data.toString());
-  });
+export async function DeveloperInstallation() {
+  await cachePassword();
+
+  const tasks = new Listr([
+    {
+      title: 'Installing Homebrew',
+      task: async () => {
+        return new Observable(observer => {
+          spawn('yarn', ['homebrew'])
+            .on('exit', () => observer.complete())
+            .stdout.on('data', data => observer.next(data.toString()));
+        });
+      }
+    },
+    {
+      title: 'Making your terminal better with Oh-My-ZSH',
+      task: () => {
+        return new Observable(observer => {
+          spawn('yarn', ['zsh'])
+            .on('exit', () => observer.complete())
+            .stdout.on('data', data => observer.next(data.toString()));
+        });
+      }
+    }
+  ]);
+  await tasks.run();
+}
+
+async function cachePassword() {
+  console.log('Caching password for installations...');
+  await execa(`${__dirname}/scripts/cache-password.sh`, { shell: true }).catch(
+    () => console.log('An error occurred while caching the password.')
+  );
 }
