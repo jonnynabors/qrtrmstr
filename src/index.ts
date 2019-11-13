@@ -39,10 +39,11 @@ class Qrtrmstr extends Command {
             return
         }
 
-        const developmentTypes: any = await DevelopmentTypes.run()
-        this.log(`your intended types are ${developmentTypes.types}`)
+        const developmentTypes: {
+            types: string[]
+        } = await DevelopmentTypes.run()
 
-        await DeveloperInstallation()
+        await DeveloperInstallation(developmentTypes)
     }
 }
 

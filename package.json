@@ -59,7 +59,9 @@
         "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
         "homebrew": "./src/scripts/homebrew.sh",
         "zsh": "./src/scripts/configuration-zsh.sh",
-        "mac": "./src/scripts/mac.sh"
+        "mac": "./src/scripts/mac.sh",
+        "open-apps": "./src/scripts/open-apps.sh",
+        "git": "./src/scripts/git.sh"
     },
     "types": "lib/index.d.ts"
 }

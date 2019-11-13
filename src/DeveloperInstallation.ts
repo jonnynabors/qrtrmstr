@@ -4,7 +4,7 @@ import * as Listr from 'listr'
 
 import { executeTask } from './Makerator'
 
-export async function DeveloperInstallation() {
+export async function DeveloperInstallation(types?: { types: string[] }) {
     await cachePassword()
     const tasks = new Listr([
         {
@@ -28,7 +28,26 @@ export async function DeveloperInstallation() {
                 return executeTask(mac)
             },
         },
+        {
+            title: `Let's get some permissions out of the way`,
+            task: async () => {
+                const open = spawn('yarn', ['open-apps'])
+                return executeTask(open)
+            },
+        },
+        {
+            title: 'Setting up git!',
+            task: async () => {
+                const git = spawn('yarn', ['git'])
+                return executeTask(git)
+            },
+        },
+        {
+            title: 'jonny',
+            task: () => '',
+        },
     ])
+
     await tasks.run()
 }
 
