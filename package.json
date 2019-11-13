@@ -1,62 +1,64 @@
 {
-  "name": "qrtrmstr",
-  "description": "An opinionated workstation setup script for Software Development and Design",
-  "version": "0.0.0",
-  "author": "Jonny Nabors (jnabors)",
-  "bin": {
-    "qrtrmstr": "./bin/run"
-  },
-  "bugs": "https://github.ford.com/JNABORS/qrtrmstr/issues",
-  "dependencies": {
-    "@oclif/command": "^1",
-    "@oclif/config": "^1",
-    "@oclif/plugin-help": "^2",
-    "execa": "3.2.0",
-    "inquirer": "7.0.0",
-    "listr": "0.14.3",
-    "rxjs": "6.5.3",
-    "tslib": "^1"
-  },
-  "devDependencies": {
-    "@oclif/test": "^1",
-    "@oclif/tslint": "^3",
-    "@types/chai": "^4",
-    "@types/execa": "2.0.0",
-    "@types/inquirer": "6.5.0",
-    "@types/listr": "0.14.2",
-    "@types/mocha": "^5",
-    "chai": "^4",
-    "cli-ux": "5.3.3",
-    "mocha": "^5",
-    "nyc": "^14",
-    "ts-node": "^8",
-    "tslint": "^5",
-    "tslint-config-prettier": "1.18.0",
-    "typescript": "^3.3"
-  },
-  "engines": {
-    "node": ">=8.0.0"
-  },
-  "files": [
-    "/bin",
-    "/lib"
-  ],
-  "homepage": "https://github.ford.com/JNABORS/qrtrmstr",
-  "keywords": [
-    "oclif"
-  ],
-  "license": "MIT",
-  "main": "lib/index.js",
-  "oclif": {
-    "bin": "qrtrmstr"
-  },
-  "repository": "https://github.ford.com/JNABORS/qrtrmstr",
-  "scripts": {
-    "posttest": "tslint -p test -t stylish",
-    "prepack": "rm -rf lib && tsc -b",
-    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "homebrew": "./src/scripts/homebrew.sh",
-    "zsh": "./src/scripts/configuration-zsh.sh"
-  },
-  "types": "lib/index.d.ts"
+    "name": "qrtrmstr",
+    "description": "An opinionated workstation setup script for Software Development and Design",
+    "version": "0.0.0",
+    "author": "Jonny Nabors",
+    "bin": {
+        "qrtrmstr": "./bin/run"
+    },
+    "bugs": "https://github.com/jonnynabors/qrtrmstr/issues",
+    "dependencies": {
+        "@oclif/command": "^1",
+        "@oclif/config": "^1",
+        "@oclif/plugin-help": "^2",
+        "execa": "3.2.0",
+        "inquirer": "7.0.0",
+        "listr": "0.14.3",
+        "rxjs": "6.5.3",
+        "tslib": "^1"
+    },
+    "devDependencies": {
+        "@oclif/test": "^1",
+        "@oclif/tslint": "^3",
+        "@types/chai": "^4",
+        "@types/execa": "2.0.0",
+        "@types/inquirer": "6.5.0",
+        "@types/listr": "0.14.2",
+        "@types/mocha": "^5",
+        "chai": "^4",
+        "cli-ux": "5.3.3",
+        "mocha": "^5",
+        "nyc": "^14",
+        "prettier": "1.19.1",
+        "pretty-quick": "2.0.1",
+        "ts-node": "^8",
+        "tslint": "^5",
+        "tslint-config-prettier": "1.18.0",
+        "typescript": "^3.3"
+    },
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "files": [
+        "/bin",
+        "/lib"
+    ],
+    "homepage": "https://github.com/jonnynabors/qrtrmstr",
+    "keywords": [
+        "oclif"
+    ],
+    "license": "MIT",
+    "main": "lib/index.js",
+    "oclif": {
+        "bin": "qrtrmstr"
+    },
+    "repository": "https://github.com/jonnynabors/qrtrmstr",
+    "scripts": {
+        "posttest": "tslint -p test -t stylish",
+        "prepack": "rm -rf lib && tsc -b",
+        "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+        "homebrew": "./src/scripts/homebrew.sh",
+        "zsh": "./src/scripts/configuration-zsh.sh"
+    },
+    "types": "lib/index.d.ts"
 }
