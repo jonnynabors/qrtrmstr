@@ -58,7 +58,8 @@
         "prepack": "rm -rf lib && tsc -b",
         "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
         "homebrew": "./src/scripts/homebrew.sh",
-        "zsh": "./src/scripts/configuration-zsh.sh"
+        "zsh": "./src/scripts/configuration-zsh.sh",
+        "mac": "./src/scripts/mac.sh"
     },
     "types": "lib/index.d.ts"
 }
