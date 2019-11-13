@@ -4,7 +4,7 @@ import { map, takeUntil } from 'rxjs/operators'
 
 const anythingToString = (anything: any) => anything.toString()
 
-export async function executeTask(task: ChildProcessWithoutNullStreams) {
+export function executeTask(task: ChildProcessWithoutNullStreams) {
     return new Observable(observer => {
         const data$ = fromEvent(task.stdout, 'data')
         const complete$ = fromEvent(task, 'exit')
